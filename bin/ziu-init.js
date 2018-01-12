@@ -217,9 +217,8 @@ function choiceProjectType () {
              * 在指定文件夹安装依赖文件
              */
             promptUseMeta(this.tempDir, fileName, (data) => {
-                console.log(this.tempDir);
                 createFile(this.tempDir, toPath)
-                .source(path.resolve(this.tempDir, './template/'))
+                .directory(path.resolve(this.tempDir, './template/'))
                 .init(function (metalsmith) {
                     render({
                         promptsData: {
@@ -242,7 +241,7 @@ function choiceProjectType () {
                 })
                 .start()
                 .end(() => {
-                    console.log(666);
+                    console.log('============ success ============');
                 });
             });
         })
