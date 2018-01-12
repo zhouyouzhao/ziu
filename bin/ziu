@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 let ziuInfo = require('../lib/info.js'),
-    ziuList = require('../bin/ziu-list.js'),
+    ziuList = require('../bin/ziu-list'),
     chalk = require('chalk'),
     cli = require('commander');
 

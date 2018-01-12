@@ -1,10 +1,11 @@
 {
   "name": "ziu",
-  "version": "1.0.6",
+  "version": "1.0.14",
   "description": "",
-  "main": "index.js",
+  "main": "bin/ziu",
   "bin": {
-    "ziu": "bin/ziu.js"
+    "ziu": "bin/ziu",
+    "ziu-init": "bin/ziu-init"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,6 +30,6 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "engines": {
-    "node": ">=6.11.1"
+    "node": ">=6.4.1"
   }
 }
