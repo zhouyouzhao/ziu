@@ -39,16 +39,25 @@ cli.on('--help', function () {
     tip();
 });
 
+
 function tip () {
     console.log('\n  Examples:');
     console.log();
-    console.log(chalk.gray('    # create a new vue project with an official template'));
-    console.log('    $ ziu init vue my-project');
-    console.log();
-    console.log(chalk.gray('    # create a new usual project with an official template'));
-    console.log('    $ ziu init usual my-project');
+    console.log(chalk.gray('    # create a new project with file name'));
+    console.log('    $ ziu init file-name');
     console.log();
 }
+
+// function tip () {
+//     console.log('\n  Examples:');
+//     console.log();
+//     console.log(chalk.gray('    # create a new vue project with an official template'));
+//     console.log('    $ ziu init vue my-project');
+//     console.log();
+//     console.log(chalk.gray('    # create a new usual project with an official template'));
+//     console.log('    $ ziu init usual my-project');
+//     console.log();
+// }
 /**
  * process.argv 用户输入的参数列表
  * cli.parse(process.argv) 转换成对象
