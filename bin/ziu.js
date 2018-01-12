@@ -10,12 +10,12 @@ let ziuInfo = require('../lib/info.js'),
 /**
  * [测试]
  */
-let createFile = require('../lib/createFiles.js');
-let path = require('path');
-let match = require('minimatch');
-var tplRender = require('consolidate').handlebars.render; // consolidate 模板引擎集合
-var handlebars = require('handlebars');
-let render = require(path.resolve(__dirname, '../tpl/render.js'));
+// let createFile = require('../lib/createFiles.js');
+// let path = require('path');
+// let match = require('minimatch');
+// var tplRender = require('consolidate').handlebars.render; // consolidate 模板引擎集合
+// var handlebars = require('handlebars');
+// let render = require(path.resolve(__dirname, '../tpl/render.js'));
 
 // createFile(path.resolve(__dirname, '../tpl/'), path.resolve(__dirname, '../test/'))
 //         .directory(path.resolve(__dirname, '../tpl/template/'))
