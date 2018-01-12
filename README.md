@@ -1,2 +1,0 @@
-# ziu
-a simple scaffolding
