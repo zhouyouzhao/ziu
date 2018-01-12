@@ -1,6 +1,6 @@
 {
   "name": "ziu",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -29,6 +29,6 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "engines": {
-    "node": ">=6.11.1"
+    "node": ">=6.4.1"
   }
 }
