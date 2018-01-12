@@ -7,9 +7,11 @@
 
 let request = require('request'),
     chalk = require('chalk'),
+    ora = require('ora'),
     conf = require('../config/index.js');
 
 module.exports = function () {
+    let spinner = ora('get ...').start();
     request({
         url: conf.listApi,
         timeout: 2 * 60 * 1000,
@@ -26,9 +28,11 @@ module.exports = function () {
             tpls.forEach((item) => {
                 output.push(`  ${chalk.cyan('★')} ${chalk.greenBright(item.name)} - ${item.description}`);
             });
+            spinner.stop();
             process.stdout.write('  Available ziu official templates:\n\n');
             return process.stdout.write(output.join('\n') + '\n\n');
         }
+        spinner.stop();
         process.stdout.write(chalk.red('  empty ziu official templates'));
     });
 }

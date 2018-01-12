@@ -4,6 +4,9 @@
  * 创建项目指令
  */
 
+let ora = require('ora'),
+    initSpinner = ora('Loading ...').start();
+
 let chalk = require('chalk'),
     path = require('path'),
     exists = require('fs').existsSync,
@@ -13,7 +16,6 @@ let chalk = require('chalk'),
     userHome = require('user-home'), // 用户根目录
     inquirer = require('inquirer'), // 交互式命令
     download = require('download-git-repo'),
-    ora = require('ora'),
     conf = require('../config/index.js'),
     checkVersion = require('../lib/checkVersion.js'),
     promptUseMeta = require('../lib/promptUseMeta.js'),
@@ -39,7 +41,6 @@ cli.on('--help', function () {
     tip();
 });
 
-
 function tip () {
     console.log('\n  Examples:');
     console.log();
@@ -47,17 +48,6 @@ function tip () {
     console.log('    $ ziu init file-name');
     console.log();
 }
-
-// function tip () {
-//     console.log('\n  Examples:');
-//     console.log();
-//     console.log(chalk.gray('    # create a new vue project with an official template'));
-//     console.log('    $ ziu init vue my-project');
-//     console.log();
-//     console.log(chalk.gray('    # create a new usual project with an official template'));
-//     console.log('    $ ziu init usual my-project');
-//     console.log();
-// }
 /**
  * process.argv 用户输入的参数列表
  * cli.parse(process.argv) 转换成对象
@@ -73,8 +63,6 @@ if (args.length <= 0) {
     // console.log('  Please use "ziu init -h" to show more\n\n');
     process.exit();
 }
-
-console.log('  Loading...\n\n')
 
 /**
  * [homeDir 用户本地根目录]
@@ -97,6 +85,7 @@ let fileName = isCurrentPlace ? path.relative('../', process.cwd()) : projectNam
  */
 let toPath = path.resolve(projectName || '.');
 
+initSpinner.stop();
 if (exists(toPath)) {
     inquirer
         .prompt([
@@ -239,7 +228,7 @@ function choiceProjectType () {
                 })
                 .start()
                 .end(() => {
-                    console.log('============ success ============');
+                    console.log('=================== success ===================');
                 });
             });
         })
