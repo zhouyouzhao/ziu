@@ -21,7 +21,6 @@ let chalk = require('chalk'),
     match = require('minimatch'),
     tplRender = require('consolidate').handlebars.render, // consolidate 模板引擎集合
     handlebars = require('handlebars'),
-    render = require(path.resolve(__dirname, '../tpl/render.js')),
     pipe = require('../lib/pipe.js');
 
 /**
@@ -217,6 +216,7 @@ function choiceProjectType () {
              * 在指定文件夹安装依赖文件
              */
             promptUseMeta(this.tempDir, fileName, (data) => {
+                let render = require(path.resolve(this.tempDir));
                 createFile(this.tempDir, toPath)
                 .directory(path.resolve(this.tempDir, './template/'))
                 .init(function (metalsmith) {
