@@ -1,15 +1,79 @@
 #!/usr/bin/env node
 
 let ziuInfo = require('../lib/info.js'),
-    ziuList = require('../bin/ziu-list'),
+    ziuList = require('../bin/ziu-list.js'),
     chalk = require('chalk'),
     cli = require('commander');
 
+
+
+/**
+ * [测试]
+ */
+// let createFile = require('../lib/createFiles.js');
+// let path = require('path');
+// let match = require('minimatch');
+// var tplRender = require('consolidate').handlebars.render; // consolidate 模板引擎集合
+// var handlebars = require('handlebars');
+// let render = require(path.resolve(__dirname, '../tpl/render.js'));
+
+// createFile(path.resolve(__dirname, '../tpl/'), path.resolve(__dirname, '../test/'))
+//         .directory(path.resolve(__dirname, '../tpl/template/'))
+//         .init(function (metalsmith) {
+//             render({
+//                 promptsData: {
+//                     name: 'ee',
+//                     description: 'A Vue.js project with ziu',
+//                     author: 'gary.zhou <gary.zhou@verystar.com> ',
+//                     build: 'standalone',
+//                     router: true,
+//                     lint: true,
+//                     lintConfig: 'standard',
+//                     // unit: true,
+//                     // runner: 'jest',
+//                     // e2e: true
+//                 },
+//                 handlebars,
+//                 match,
+//                 metalsmith,
+//                 render: tplRender
+//             });
+//         })
+//         .use((files) => {
+//             console.log(Object.keys(files));
+//         })
+//         .start()
+//         .end(() => {
+//             console.log(666);
+//         });
+// require('../lib/promptUseMeta')('../tpl/', 'ee', function (data) {
+//     console.log(data);
+//     createFile(path.resolve(__dirname, '../tpl/'), path.resolve(__dirname, '../test/'))
+//         .source(path.resolve(__dirname, '../tpl/template/'))
+//         .use(function (files, metalsmith, next) {
+//             render({
+//                 promptsData: data, 
+//                 files,
+//                 metalsmith,
+//                 render: tplRender,
+//                 next,
+//             });
+//         })
+//         .start()
+//         .end(() => {
+//             console.log(666);
+//         });
+// });
+
+// ------------------- /
+// let install = require('../lib/installDepend.js');
+// install();
 ziuInfo();
 
 cli
     .version(`print ziu Version: ${require('../package').version}`)
     .usage('<command> [options]')
+    .option('-v, --version', `print ziu Version: ${require('../package').version}`)
     .command('init', 'generate a new project from a template')
     // .command('list', 'list available official templates')
     // .command('mock', 'run local server')

@@ -20,6 +20,10 @@ let chalk = require('chalk'),
     checkVersion = require('../lib/checkVersion.js'),
     promptUseMeta = require('../lib/promptUseMeta.js'),
     createFile = require('../lib/createFiles.js'),
+    useGuide = require('../lib/useGuide.js'),
+    sortDepend = require('../lib/sortDepend.js'),
+    installDepend = require('../lib/installDepend.js'),
+    eslintFix = require('../lib/eslint.js'),
     match = require('minimatch'),
     tplRender = require('consolidate').handlebars.render, // consolidate 模板引擎集合
     handlebars = require('handlebars'),
@@ -106,6 +110,7 @@ if (exists(toPath)) {
 
 
 function choiceProjectType () {
+    let promptsData = {};
     pipe({
         data: {
             typeList: [],
@@ -207,19 +212,23 @@ function choiceProjectType () {
             });
         })
         .next(function () {
-            /**
-             * TODO: 
-             * 渲染package.json文件
-             * 复制模板到目标指定文件夹
-             * 在指定文件夹安装依赖文件
-             */
+
+            if (!exists(path.resolve(this.tempDir, 'render.js'))) {
+                throw new Error(`Template-${this.selectType} is illegal!`);
+            }
             promptUseMeta(this.tempDir, fileName, (data) => {
+                data.isCurrentPlace = isCurrentPlace;
+                data.fileName = fileName;
+
+                promptsData = data;
+                // console.log(data);
                 let render = require(path.resolve(this.tempDir, 'render.js'));
+
                 createFile(this.tempDir, toPath)
                 .directory(path.resolve(this.tempDir, './template/'))
                 .init(function (metalsmith) {
                     render({
-                        promptsData: data,
+                        promptsData: promptsData,
                         handlebars,
                         match,
                         metalsmith,
@@ -228,9 +237,25 @@ function choiceProjectType () {
                 })
                 .start()
                 .end(() => {
-                    console.log('=================== success ===================');
+                    this.next();
                 });
             });
+        })
+        .next(function () {
+            if (!exists(path.resolve(toPath, 'package.json'))) {
+                return console.error(chalk.red('Waring: No package.json'));
+            }
+            sortDepend(toPath);
+            installDepend(promptsData, toPath, () => {
+                this.next();
+            });
+
+        })
+        .next(function () {
+            eslintFix(promptsData, toPath, this.next);
+        })
+        .next(function () {
+            useGuide(promptsData);
         })
         .start()
         .end(function () {

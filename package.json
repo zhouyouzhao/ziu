@@ -1,11 +1,11 @@
 {
   "name": "ziu",
-  "version": "1.0.14",
+  "version": "1.0.17",
   "description": "",
-  "main": "bin/ziu",
+  "main": "index.js",
   "bin": {
-    "ziu": "bin/ziu",
-    "ziu-init": "bin/ziu-init"
+    "ziu": "bin/ziu.js",
+    "ziu-init": "bin/ziu-init.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
