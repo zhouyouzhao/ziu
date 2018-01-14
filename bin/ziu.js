@@ -3,6 +3,7 @@
 let ziuInfo = require('../lib/info.js'),
     ziuList = require('../bin/ziu-list.js'),
     chalk = require('chalk'),
+    exec = require('child_process').spawn,
     cli = require('commander');
 
 
@@ -110,7 +111,12 @@ cli
     .command('dev')
     .description('run development environment')
     .action(() => {
-        console.log('dev');
+        console.log('Development Environment Starting...');
+        exec('npm', ['run', 'dev'], {
+            cwd: process.cwd(),
+            stdio: 'inherit',
+            shell: true
+        });
     });
 
 /**
@@ -131,7 +137,12 @@ cli
     .command('build')
     .description('run build environments')
     .action(() => {
-        console.log('build');
+        console.log('Build Environment Starting...');
+        exec('npm', ['run', 'build'], {
+            cwd: process.cwd(),
+            stdio: 'inherit',
+            shell: true
+        });
     });
 
 /**
