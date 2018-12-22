@@ -11,7 +11,7 @@ let request = require('request'),
     conf = require('../config/index.js');
 
 module.exports = function () {
-    let spinner = ora('get ...').start();
+    let spinner = ora('getting ...').start();
     request({
         url: conf.listApi,
         timeout: 2 * 60 * 1000,

@@ -126,12 +126,14 @@ function choiceProjectType () {
              * [获取支持的模板]
              */
             let _this = this,
+                modifiedStartTime = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
                 spinner = ora('get template ...').start();
             request({
                 url: conf.listApi,
                 timeout: 2 * 60 * 1000,
                 headers: {
-                    'User-Agent': _this.githubUseName
+                    'User-Agent': _this.githubUseName,
+                    'If-Modified-Since': modifiedStartTime.toGMTString()
                 }
             }, function (err, res, body) {
                 spinner.stop();
@@ -154,6 +156,7 @@ function choiceProjectType () {
                     _this.typeList = output;
                     return _this.next();
                 }
+                console.log(body);
                 _this.next(new Error('  empty ziu official templates'));
             });
         })
