@@ -133,9 +133,10 @@ function choiceProjectType () {
                 timeout: 2 * 60 * 1000,
                 headers: {
                     'User-Agent': _this.githubUseName,
-                    'If-Modified-Since': modifiedStartTime.toGMTString()
+                    // 'If-Modified-Since': modifiedStartTime.toGMTString()
                 }
             }, function (err, res, body) {
+                // console.log(res.headers);
                 spinner.stop();
                 if (err) {
                     return _this.next(err);
@@ -224,7 +225,6 @@ function choiceProjectType () {
                 data.fileName = fileName;
 
                 promptsData = data;
-                // console.log(data);
                 let render = require(path.resolve(this.tempDir, 'render.js'));
 
                 createFile(this.tempDir, toPath)
@@ -245,6 +245,9 @@ function choiceProjectType () {
             });
         })
         .next(function () {
+            if (promptsData.closeInstall) {
+                return this.next();
+            }
             if (!exists(path.resolve(toPath, 'package.json'))) {
                 return console.error(chalk.red('Waring: No package.json'));
             }
@@ -255,9 +258,15 @@ function choiceProjectType () {
 
         })
         .next(function () {
+            if (promptsData.closeInstall) {
+                return this.next();
+            }
             eslintFix(promptsData, toPath, this.next);
         })
         .next(function () {
+            if (promptsData.closeInstall) {
+                return this.next();
+            }
             useGuide(promptsData);
         })
         .start()
