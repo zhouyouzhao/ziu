@@ -1,11 +1,12 @@
 {
   "name": "ziu",
-  "version": "1.2.5",
+  "version": "1.4.0",
   "description": "",
   "main": "index.js",
   "bin": {
     "ziu": "bin/ziu.js",
-    "ziu-init": "bin/ziu-init.js"
+    "ziu-init": "bin/ziu-init.js",
+    "git-zm": "bin/git-zm.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "commitizen": "^3.0.7",
     "chalk": "^2.3.0",
     "child_process": "^1.0.2",
     "commander": "^2.12.2",
@@ -24,6 +26,7 @@
     "imagemin-jpegtran": "^6.0.0",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-pngquant": "^6.0.0",
+    "imagemin-svgo": "^7.0.0",
     "inquirer": "^5.0.0",
     "metalsmith": "^2.3.0",
     "minimatch": "^3.0.4",
