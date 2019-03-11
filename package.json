@@ -1,12 +1,13 @@
 {
   "name": "ziu",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "",
   "main": "index.js",
   "bin": {
     "ziu": "bin/ziu.js",
     "ziu-init": "bin/ziu-init.js",
-    "git-zm": "bin/git-zm.js"
+    "git-zm": "bin/git-zm.js",
+    "ziu-commit": "bin/ziu-commit.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

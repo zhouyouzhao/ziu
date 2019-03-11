@@ -23,6 +23,7 @@ cli
   .usage('<command> [options]')
   .option('-v, --version', `print ziu Version: ${require('../package').version}`)
   .command('init', 'generate a new project from a template')
+  .command('commit', 'use angular commit message')
 // .command('list', 'list available official templates')
 // .command('mock', 'run local server')
 // .command('dev', 'run development environment')
@@ -151,17 +152,17 @@ cli
 /**
  * git commit信息
  */
-cli
-  .command('commit')
-  .description('Angular Commit Message')
-  .action(() => {
-    gitZm();
-  })
-  .on('--help', () => {
-    console.log('\n\n  Available ziu commit \n');
-    console.log(`  ${chalk.cyan('★')} First use "git add [options]"\n`);
-    console.log('  Examples:\n');
-    console.log('    $ ziu commit\n');
-  });
+// cli
+//   .command('commit')
+//   .description('Angular Commit Message')
+//   .action(() => {
+//     gitZm();
+//   })
+//   .on('--help', () => {
+//     console.log('\n\n  Available ziu commit \n');
+//     console.log(`  ${chalk.cyan('★')} First use "git add [options]"\n`);
+//     console.log('  Examples:\n');
+//     console.log('    $ ziu commit\n');
+//   });
 
 cli.parse(process.argv);
