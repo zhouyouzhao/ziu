@@ -5,8 +5,7 @@ let ziuInfo = require('../lib/info.js'),
   chalk = require('chalk'),
   exec = require('child_process').spawn,
   cli = require('commander'),
-  compressPictures = require('../lib/compressPictures'),
-  gitZm = require('../git/gitZm');
+  compressPictures = require('../lib/compressPictures');
 
 ziuInfo();
 cli.Command.prototype.missingArgument = function(name) {
@@ -24,6 +23,7 @@ cli
   .option('-v, --version', `print ziu Version: ${require('../package').version}`)
   .command('init', 'generate a new project from a template')
   .command('commit', 'use angular commit message')
+  .command('cl', 'generate a changelog from git metadata')
 // .command('list', 'list available official templates')
 // .command('mock', 'run local server')
 // .command('dev', 'run development environment')
