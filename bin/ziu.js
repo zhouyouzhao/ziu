@@ -24,6 +24,7 @@ cli
   .command('init', 'generate a new project from a template')
   .command('commit', 'use angular commit message')
   .command('cl', 'generate a changelog from git metadata')
+  .command('avd', 'start android virtual device')
 // .command('list', 'list available official templates')
 // .command('mock', 'run local server')
 // .command('dev', 'run development environment')
@@ -164,5 +165,53 @@ cli
 //     console.log('  Examples:\n');
 //     console.log('    $ ziu commit\n');
 //   });
+
+/**
+ * 启动安卓模拟器
+ */
+cli
+  .command('avd')
+  .description('start android virtual device')
+  .usage('<name> [options]')
+  .option('-l, --list', 'List available Android Virtual Device')
+  .action((opts) => {
+    if (typeof opts === 'object') {
+      if (opts.list) {
+        return exec(
+          'emulator',
+          ['-list-avds'], {
+            cwd: process.cwd(),
+            stdio: 'inherit',
+            shell: true
+          });
+      } else {
+        avdHelp();
+      }
+    } else {
+      if (opts) {
+        exec(
+          'emulator',
+          ['-netdelay', 'none', '-netspeed', 'full', '-avd', opts], {
+            cwd: process.cwd(),
+            stdio: 'inherit',
+            shell: true
+          });
+      } else {
+        avdHelp();
+      }
+    }
+  })
+  .on('--help', () => {
+    avdHelp();
+  });
+
+function avdHelp() {
+  console.log('\n\n  Available ziu avd <name> [options]\n');
+  console.log(`  ${chalk.cyan('★')} <name> - Android Virtual Device Name\n`);
+  console.log(`  ${chalk.cyan('★')} [options] - List Android Virtual Device Name\n`);
+  console.log('  Examples:\n');
+  console.log('    $ ziu avd test\n');
+  console.log('    $ ziu avd -l\n');
+}
 
 cli.parse(process.argv);
