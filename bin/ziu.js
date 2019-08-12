@@ -25,6 +25,7 @@ cli
   .command('commit', 'use angular commit message')
   .command('cl', 'generate a changelog from git metadata')
   .command('avd', 'start android virtual device')
+  .command('uia', 'start uiautomatorviewer')
 // .command('list', 'list available official templates')
 // .command('mock', 'run local server')
 // .command('dev', 'run development environment')
@@ -213,5 +214,27 @@ function avdHelp() {
   console.log('    $ ziu avd test\n');
   console.log('    $ ziu avd -l\n');
 }
+
+
+/**
+ * 启动uiautomatorviewer
+ */
+cli
+  .command('uia')
+  .description('start uiautomatorviewer')
+  .action(() => {
+    exec(
+      'uiautomatorviewer',
+      [], {
+        cwd: process.cwd(),
+        stdio: 'inherit',
+        shell: true
+      });
+  })
+  .on('--help', () => {
+    console.log('\n\n  Available ziu uia \n');
+    console.log('  Examples:\n');
+    console.log('    $ ziu uia\n');
+  });
 
 cli.parse(process.argv);
